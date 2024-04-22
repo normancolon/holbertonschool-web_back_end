@@ -12,9 +12,8 @@ async def async_generator() -> AsyncGenerator[float, None]:
     """
     for _ in range(10):
         await asyncio.sleep(1)
-        yield random.uniform(0, 10)  # Generate a random floating point number
+        yield random.uniform(0, 10)
 
-# This section is for testing and is not part of the coroutine module.
 if __name__ == "__main__":
     async def print_yielded_values():
         result = []
