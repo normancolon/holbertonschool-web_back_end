@@ -1,30 +1,30 @@
 #!/usr/bin/env python3
-"""Learning Async in Python using random delays with an async generator."""
+"""Module for exploring asynchronous generators in Python."""
 
-import asyncio
 import random
+import asyncio
+from typing import Generator
 
 
-async def async_generator(max_delay: int = 10, count: int = 10) -> float:
+async def async_generator() -> Generator[float, None, None]:
     """
-    Asynchronously generates random delays up to 'max_delay' seconds.
+    Asynchronously generates and yields ten random floats between 0 and 10,
+    with a one-second delay between each generation.
 
-    Args:
-        max_delay (int): Maximum delay in seconds. Default is 10.
-        count (int): Number of random delays to generate. Default is 10.
+    Each yield returns a random float, simulating a process where each step
+    takes some time (e.g., data retrieval or computation).
 
     Yields:
-        float: A random delay time that was awaited.
+        float: A random float between 0 and 10 after a 1-second delay.
     """
-    for _ in range(count):
-        delay = random.uniform(0, max_delay)
-        await asyncio.sleep(delay)
-        yield delay
+    for _ in range(10):  # Use '_' when the index is not utilized
+        await asyncio.sleep(1)  # Delay to simulate an asynchronous operation
+        yield random.uniform(0, 10)  # Yield a random floating-point number
 
-# Example usage (not part of the module):
+# Example usage of the async generator, if this script is executed directly.
 if __name__ == "__main__":
-    async def main():
-        async for delay in async_generator(5, 5):
-            print(delay)
+    async def display_numbers():
+        async for number in async_generator():
+            print(f"Generated number: {number}")
 
-    asyncio.run(main())
+    asyncio.run(display_numbers())
