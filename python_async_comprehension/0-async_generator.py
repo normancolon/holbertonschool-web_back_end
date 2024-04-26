@@ -1,25 +1,28 @@
 #!/usr/bin/env python3
-"""Learning Async in Python using random delays"""
-
+"""
+Module to demonstrate asynchronous programming in Python
+with a simple coroutine that waits for a random time.
+"""
 import asyncio
 import random
 
 
 async def wait_random(max_delay: int = 10) -> float:
     """
-    Asynchronously waits for a random time up to 'max_delay' seconds.
+    Asynchronous coroutine that waits for a random delay up to max_delay
+    seconds and returns the duration of that delay.
 
     Args:
-        max_delay (int): Maximum delay in seconds. Default is 10.
+        max_delay (int): Maximum number of seconds to delay. Defaults to 10.
 
     Returns:
-        float: The actual delay time that was awaited.
+        float: The actual delay in seconds.
     """
     delay = random.uniform(0, max_delay)
     await asyncio.sleep(delay)
     return delay
 
-# Example usage (not part of the module):
+# Example usage code, as seen in the provided commands:
 if __name__ == "__main__":
     async def main():
         print(await wait_random())
