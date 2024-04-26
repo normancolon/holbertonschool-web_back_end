@@ -1,21 +1,31 @@
 #!/usr/bin/env python3
-'''
-Function that creates an asyncio Task from an asynchronous coroutine.
-'''
+"""Module to create asyncio tasks using wait_random from a prior module."""
+
 import asyncio
 
-# Adjust the import path as needed for your project structure
-wait_random = __import__('0-basic_async_syntax').wait_random
 
-
-def task_wait_random(max_delay: int):
+def task_wait_random(max_delay: int) -> asyncio.Task:
     """
-    Creates and returns an asyncio.Task which completes after a random delay.
+    Creates an asyncio.Task that executes the wait_random coroutine with a specified delay.
 
     Args:
-    max_delay (int): The maximum delay in seconds that the wait_random coroutine can wait.
+        max_delay (int): Maximum delay, in seconds, before the task completes.
 
     Returns:
-    asyncio.Task: A task that will complete after the wait_random coroutine has finished.
+        asyncio.Task: The task running the wait_random coroutine.
     """
+    # Import the wait_random function dynamically to ensure modular flexibility
+    wait_random = __import__('0-basic_async_syntax').wait_random
+
+    # Create and return the task using the wait_random coroutine
     return asyncio.create_task(wait_random(max_delay))
+
+
+# This testing block runs only if this script is executed directly.
+if __name__ == "__main__":
+    async def test(max_delay: int) -> None:
+        task = task_wait_random(max_delay)
+        await task  # Await the task to completion
+        print(task.__class__)  # Print the class of the task to verify its type
+
+    asyncio.run(test(5))
