@@ -1,29 +1,39 @@
 #!/usr/bin/env python3
-'''
-Async coroutine that spawns multiple wait_random coroutines and returns their results in order of completion.
-'''
+"""Learning Async Programming"""
 import asyncio
-from random import uniform
-
-# Make sure to adjust the import statement based on your project structure
-wait_random = __import__('0-basic_async_syntax').wait_random
+from typing import List
 
 
-async def wait_n(n: int, max_delay: int) -> list:
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Spawn wait_random coroutine n times with the specified max_delay.
-    Returns a list of delays in the order that the tasks complete.
+    Executes multiple instances of the wait_random coroutine concurrently,
+    collecting and returning the delays as they complete.
 
-    Args:
-    n (int): Number of times to spawn wait_random.
-    max_delay (int): Maximum delay to pass to wait_random.
+    Parameters:
+        n (int): The number of times to run the coroutine.
+        max_delay (int): The maximum delay each coroutine waits before returning.
 
     Returns:
-    list: A list of float values representing the delays, in order of completion.
+        List[float]: A list of floating-point numbers representing the delays,
+                     returned in the order that the tasks complete.
     """
-    tasks = [asyncio.create_task(wait_random(max_delay)) for _ in range(n)]
-    completed_delays = []
-    for future in asyncio.as_completed(tasks):
-        result = await future
-        completed_delays.append(result)
-    return completed_delays
+    # Import wait_random inside the function to avoid potential import issues at the module level.
+    wait_random = __import__('0-basic_async_syntax').wait_random
+
+    # Create a list of coroutine objects using a list comprehension.
+    tasks = [wait_random(max_delay) for _ in range(n)]
+
+    # Collect completed tasks using asyncio.as_completed to maintain the order of completion.
+    return [await task for task in asyncio.as_completed(tasks)]
+
+# Testing the function if the script is run as the main module.
+if __name__ == "__main__":
+    async def main():
+        results = await wait_n(5, 5)
+        print(results)
+        results = await wait_n(10, 7)
+        print(results)
+        results = await wait_n(10, 0)
+        print(results)
+
+    asyncio.run(main())

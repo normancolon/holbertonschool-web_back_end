@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-'''
-Function to create multiple asyncio tasks and return their results.
-'''
+"""Learning Async"""
 import asyncio
-
-# Make sure to adjust the import statement based on your project structure
-task_wait_random = __import__('3-tasks').task_wait_random
+from typing import List
 
 
-async def task_wait_n(n: int, max_delay: int) -> list:
+async def task_wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Creates and gathers multiple tasks using task_wait_random and returns the results.
-
-    Args:
-    n (int): Number of tasks to create.
-    max_delay (int): Maximum delay to use in task_wait_random calls.
-
-    Returns:
-    list: A list of float values representing the delays, in order of completion.
+    Method: wait_n - run  multiple coroutines
+        in tandam with async
+    Parameters:
+        @n: wait_random n number of times
+        @max_delay: the max delay in seconds
+        inside wait_random
+    Return: a list of the times for the tasks
     """
-    tasks = [task_wait_random(max_delay) for _ in range(n)]
-    completed_delays = await asyncio.gather(*tasks)
-    return sorted(completed_delays)
+    task_wait_random = __import__('3-tasks').task_wait_random
+    delay_list = [task_wait_random(max_delay) for i in range(n)]
+    completed_tasks = []
+
+    for task in asyncio.as_completed(delay_list):
+        completed_tasks.append(await task)
+
+    return completed_tasks
