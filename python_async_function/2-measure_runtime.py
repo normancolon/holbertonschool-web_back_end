@@ -1,30 +1,33 @@
 #!/usr/bin/env python3
-"""Learning Async Programming"""
+"""Measure runtime of asynchronous tasks."""
+
 import time
 import asyncio
 
 
 def measure_time(n: int, max_delay: int) -> float:
     """
-    Measures the average execution time of wait_n(n, max_delay) per execution.
+    Measures the average execution time of wait_n function with n tasks and max_delay.
 
     Args:
-        n (int): The number of times to run the coroutine.
-        max_delay (int): The maximum delay each coroutine waits before returning.
+        n (int): Number of asynchronous tasks to run.
+        max_delay (int): Maximum delay each task waits before completion.
 
     Returns:
-        float: The average time taken per execution of wait_n.
+        float: The average time per task.
     """
-    # Import wait_n at the function level to avoid import-time side effects.
+    # Import the wait_n function from the module where it's defined.
     wait_n = __import__('1-concurrent_coroutines').wait_n
+
     start_time = time.time()
     asyncio.run(wait_n(n, max_delay))
-    total_time = time.time() - start_time
+    end_time = time.time()
 
+    total_time = end_time - start_time
     return total_time / n
 
 
-# Example test code.
+# Example usage
 if __name__ == "__main__":
     n = 5
     max_delay = 9
