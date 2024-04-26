@@ -1,30 +1,25 @@
 #!/usr/bin/env python3
-"""Explore asynchronous programming with a focus on generators."""
-
+"""
+Exploration of asynchronous programming with a focus on runtime
+measurement.
+"""
 import time
 import asyncio
+# Import async_comprehension from its respective module
+async_comprehension = __import__(
+    '1-async_comprehension').async_comprehension
 
 
-fetch_async_data = __import__('1-async_comprehension').async_comprehension
-
-
-async def calculate_parallel_execution_time() -> float:
+async def measure_runtime() -> float:
     """
-    Measure the time taken to concurrently execute the fetch_async_data function
+    Execute async_comprehension four times concurrently,
+    measure and return the execution time.
 
     Returns:
-        float: The total elapsed time in seconds to complete all four operations.
+        float: Total time in seconds for all tasks to complete.
     """
     start_time = time.time()
-    # Execute four instances of the asynchronous comprehension concurrently
-    await asyncio.gather(*(fetch_async_data() for _ in range(4)))
+    await asyncio.gather(*(async_comprehension() for _ in range(4)))
     end_time = time.time()
 
     return end_time - start_time
-
-if __name__ == "__main__":
-    async def main():
-        execution_time = await calculate_parallel_execution_time()
-        print(f"Total parallel execution time: {execution_time} seconds")
-
-    asyncio.run(main())
