@@ -9,7 +9,7 @@ async def wait_random(max_delay: int = 10) -> float:
     It returns the actual delay.
 
     Args:
-    max_delay (int): The maximum delay time in seconds. Default is 10.
+    max_delay (int): The maximum delay time in seconds.
 
     Returns:0-basic_async_syntax.py
     float: The actual delay time.

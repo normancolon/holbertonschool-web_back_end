@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Learning Async Programming"""
+"""Async Programming"""
 import asyncio
 from typing import List
 
 
 async def wait_n(n: int, max_delay: int) -> List[float]:
     """
-    Executes multiple instances of the wait_random coroutine concurrently,
+    Executes multiple instances of the wait_random coroutine
     collecting and returning the delays as they complete.
 
     Parameters:
         n (int): The number of times to run the coroutine.
-        max_delay (int): The maximum delay each coroutine waits before returning.
+        max_delay (int): maximum delay each coroutine.
 
     Returns:
-        List[float]: A list of floating-point numbers representing the delays,
-                     returned in the order that the tasks complete.
+        List[float]: list of floating-point numbers representing  delays,
+                     returned in  order that the tasks complete.
     """
     # Import wait_random inside the function to avoid potential import issues at the module level.
     wait_random = __import__('0-basic_async_syntax').wait_random
