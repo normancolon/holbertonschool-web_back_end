@@ -10,9 +10,7 @@ def measure_time(n: int, max_delay: int) -> float:
     coroutine.
 
     Parameters:
-        n (int): Number of operations to run concurrently.
-        max_delay (int): Max delay each operation can take in seconds.
-
+        n (int): Number of operations to run.
     Returns:
         float: Average time per operation.
     """
@@ -21,7 +19,7 @@ def measure_time(n: int, max_delay: int) -> float:
 
     # Measure start time
     start_time = time.time()
-    # Execute wait_n coroutine and wait for completion
+    # wait_n coroutine and wait for completion
     asyncio.run(wait_n(n, max_delay))
     # Measure end time
     end_time = time.time()
