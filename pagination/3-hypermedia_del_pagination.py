@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """
-Deletion-resilient hypermedia pagination for a database of popular baby names.
+for a database of popular baby names.
 """
 import csv
 from typing import List, Dict
 
 
 class Server:
-    """Server class to paginate a database of popular baby names."""
+    """paginate a database of popular baby names."""
     DATA_FILE = "Popular_Baby_Names.csv"
 
     def __init__(self):
@@ -23,16 +23,13 @@ class Server:
         return self.__dataset
 
     def indexed_dataset(self) -> Dict[int, List]:
-        """Create and return an indexed dataset up to the first 1000 records."""
+
         if self.__indexed_dataset is None:
             self.__indexed_dataset = {i: item for i, item in enumerate(self.dataset()[:1000])}
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = 0, page_size: int = 10) -> Dict:
-        """
-        Return pagination details starting from a given index with a set page size.
-        Includes the current index, next index, page size, and page data.
-        """
+
         current_data = self.dataset()
         next_index = index + page_size
         page_data = current_data[index:next_index]
