@@ -42,9 +42,3 @@ class Server:
             'page_size': page_size,
             'data': page_data
         }
-
-
-if __name__ == "__main__":
-    server = Server()
-    print(server.get_hyper_index(0, 10))  # Example usage
-

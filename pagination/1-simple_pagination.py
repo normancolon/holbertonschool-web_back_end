@@ -32,9 +32,3 @@ class Server:
         start = (page - 1) * page_size
         end = start + page_size
         return (start, end)
-
-
-if __name__ == "__main__":
-    server = Server()
-    print(server.get_page(1, 10))  # Example usage
-
