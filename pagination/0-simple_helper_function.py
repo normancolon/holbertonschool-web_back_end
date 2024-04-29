@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """
-Write a function `index_range` that calculates the start and end indexes
-for pagination, given page numbers and page size, with 1-indexed pages.
+calculates the start and end indexes
 """
 
 

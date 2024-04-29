@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
-"""
-Create a function named `index_range` that takes two integers: `page`
-and `page_size`. This function returns a tuple containing a start index
-and an end index corresponding to the range of indexes to return in a
-list for those particular pagination parameters. Pages are 1-indexed.
-"""
+""" simple pagination """
 import csv
 from typing import List
 
@@ -33,7 +28,7 @@ class Server:
         return self.dataset()[range_start_end[0]:range_start_end[1]]
 
     def index_range(self, page, page_size) -> tuple:
-        """Calculate start and end indices for pagination based on the page number and size."""
+        """ gets page """
         start = (page - 1) * page_size
         end = start + page_size
         return (start, end)
