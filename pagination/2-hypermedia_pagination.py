@@ -5,7 +5,7 @@ hypermedia information such as pagination details.
 """
 import csv
 import math
-from typing import List
+from typing import List, Dict, Tuple
 
 
 class Server:
@@ -26,18 +26,22 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Fetch a paginated slice of baby names, ensuring valid page inputs."""
         assert isinstance(page, int) and page > 0, "Page must be a positive integer"
-        assert isinstance(page_size, int) and page_size > 0, "Page size must be positive"
+        assert isinstance(page_size, int) and page_size > 0, \
+            "Page size must be positive"
         
         range_start_end = self.index_range(page, page_size)
         return self.dataset()[range_start_end[0]:range_start_end[1]]
 
-    def index_range(self, page, page_size) -> tuple:
-        """Calculate start and end indices for pagination based on the page number and size."""
+    def index_range(self, page, page_size) -> Tuple[int, int]:
+        """
+        Calculate start and end indices for pagination based on the page number
+        and size.
+        """
         start = (page - 1) * page_size
         end = start + page_size
         return (start, end)
 
-    def get_hyper(self, page: int, page_size: int) -> dict:
+    def get_hyper(self, page: int, page_size: int) -> Dict[str, any]:
         """Generate hypermedia pagination details."""
         data = self.get_page(page, page_size)
         total_items = len(self.dataset())
@@ -51,3 +55,4 @@ class Server:
             'prev_page': page - 1 if page > 1 else None,
             'total_pages': total_pages
         }
+
