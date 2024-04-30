@@ -24,11 +24,14 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Fetch a paginated slice of baby names, ensuring valid page inputs."""
-        assert isinstance(page, int) and page > 0, "Page must be a positive integer"
+        """
+        Fetch a paginated slice of baby names, ensuring valid page inputs.
+        """
+        assert isinstance(page, int) and page > 0, \
+            "Page must be a positive integer"
         assert isinstance(page_size, int) and page_size > 0, \
             "Page size must be positive"
-        
+
         range_start_end = self.index_range(page, page_size)
         return self.dataset()[range_start_end[0]:range_start_end[1]]
 
@@ -42,7 +45,9 @@ class Server:
         return (start, end)
 
     def get_hyper(self, page: int, page_size: int) -> Dict[str, any]:
-        """Generate hypermedia pagination details."""
+        """
+        Generate hypermedia pagination details.
+        """
         data = self.get_page(page, page_size)
         total_items = len(self.dataset())
         total_pages = math.ceil(total_items / page_size)
@@ -55,4 +60,3 @@ class Server:
             'prev_page': page - 1 if page > 1 else None,
             'total_pages': total_pages
         }
-
