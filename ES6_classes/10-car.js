@@ -1,4 +1,4 @@
-// 10-car.js
+#!/usr/bin/node
 export default class Car {
   constructor(brand, motor, color) {
     this._brand = brand;

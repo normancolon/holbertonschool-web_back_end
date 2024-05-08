@@ -1,7 +1,6 @@
-// Importing the ClassRoom class from the '0-classroom.js' file
+#!/usr/bin/node
 import ClassRoom from './0-classroom.js';
 
-// Function to initialize an array of ClassRoom objects with specific sizes
 function initializeRooms() {
   return [
     new ClassRoom(19),
@@ -10,6 +9,6 @@ function initializeRooms() {
   ];
 }
 
-// Exporting the initializeRooms function so it can be imported and used in other files
+
 export default initializeRooms;
 
