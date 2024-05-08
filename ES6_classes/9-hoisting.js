@@ -1,5 +1,6 @@
-// Correctly declare classes before their instances are created.
-
+/**
+ * Represents a class cohort at Holberton School.
+ */
 export class HolbertonClass {
   constructor(year, location) {
     this._year = year;
@@ -15,6 +16,13 @@ export class HolbertonClass {
   }
 }
 
+// Create instances of HolbertonClass for 2019 and 2020 cohorts.
+const class2019 = new HolbertonClass(2019, 'San Francisco');
+const class2020 = new HolbertonClass(2020, 'San Francisco');
+
+/**
+ * Represents a student at Holberton School.
+ */
 export class StudentHolberton {
   constructor(firstName, lastName, holbertonClass) {
     this._firstName = firstName;
@@ -30,19 +38,19 @@ export class StudentHolberton {
     return this._holbertonClass;
   }
 
+  // Returns a full description including the student's name, and their class year and location.
   get fullStudentDescription() {
-    return `${this._firstName} ${this._lastName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}`;
+    return `${this.fullName} - ${this._holbertonClass.year} - ${this._holbertonClass.location}`;
   }
 }
 
-// Create instances after the class definitions.
-const class2019 = new HolbertonClass(2019, 'San Francisco');
-const class2020 = new HolbertonClass(2020, 'San Francisco');
+// Array of students for easy management and display.
+const listOfStudents = [
+  new StudentHolberton('Guillaume', 'Salva', class2020),
+  new StudentHolberton('John', 'Doe', class2020),
+  new StudentHolberton('Albert', 'Clinton', class2019),
+  new StudentHolberton('Donald', 'Bush', class2019),
+  new StudentHolberton('Jason', 'Sandler', class2019)
+];
 
-const student1 = new StudentHolberton('Guillaume', 'Salva', class2020);
-const student2 = new StudentHolberton('John', 'Doe', class2020);
-const student3 = new StudentHolberton('Albert', 'Clinton', class2019);
-const student4 = new StudentHolberton('Donald', 'Bush', class2019);
-const student5 = new StudentHolberton('Jason', 'Sandler', class2019);
-
-export const listOfStudents = [student1, student2, student3, student4, student5];
+export default listOfStudents;
