@@ -12,3 +12,4 @@ function initializeRooms() {
 
 // Exporting the initializeRooms function so it can be imported and used in other files
 export default initializeRooms;
+
